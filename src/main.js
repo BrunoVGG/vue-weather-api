@@ -14,7 +14,7 @@ import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import store from './modules/index.js'; // VueX
-import './assets/sass/base.scss'
+// import './assets/sass/base.scss'
 
 library.add(faUserSecret)
 library.add(faUser)
@@ -24,6 +24,11 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.use(BootstrapVue)
 Vue.use(VueAxios, axios)
 Vue.use(HighchartsVue)
+
+Vue.prototype.weather = {
+  urlId: '&APPID=375a6328896bcf6fb7347fa13778d92e',
+  urlBase: 'http://api.openweathermap.org/data/2.5/'
+}
 
 Vue.config.productionTip = false
 
