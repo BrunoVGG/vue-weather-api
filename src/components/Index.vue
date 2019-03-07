@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <button @click="callApi" class="btn btn-success">CALL API</button> <br><br>
+    <button @click="callApi" class="btn btn-success">CALL API 2</button> <br><br>
     <button @click="callCurrent" class="btn btn-success">Current</button><br><br>
     <button @click="callApi" class="btn btn-success">Forecast</button> <br><br>
 
