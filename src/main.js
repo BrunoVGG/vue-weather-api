@@ -13,8 +13,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import store from './modules/index.js';
-//      src\assets\sass\main.scss
+import store from './modules/index.js'; // VueX
 import './assets/sass/base.scss'
 
 library.add(faUserSecret)

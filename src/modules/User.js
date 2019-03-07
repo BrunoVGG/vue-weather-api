@@ -17,8 +17,8 @@ const User = {
     }
   },
   actions: {
-    verifyIfHasUser(context) {
-      context.commit('increment')
+    verifyIfHasUser(context, data) {
+      context.commit('MyUser', userData)
     },
     getUser(context) {
 
@@ -43,11 +43,23 @@ const User = {
         }
 
         if (!errors.login && !errors.password) {
+          let _userData = {
+            avatar: null,
+            name: 'User Name',
+            email: '',
+            token: 'token_from_api'
+          }
+
+          context.dispatch('saveLocalUserData', _userData);
+          context.commit('refreshUser', _userData);
           result();
         } else {
           reject(errors);
         }
       })
+    },
+    saveLocalUserData(context, data) {
+      sessionStorage.setItem('user', JSON.stringify(data));
     }
   }
 }
