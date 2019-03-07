@@ -13,9 +13,6 @@ export default {
 
 <style>
 
-html {
-  background-color: #56baed
-}
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -23,6 +20,5 @@ html {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
-  background-color: #56baed
 }
 </style>

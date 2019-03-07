@@ -14,6 +14,8 @@ import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import store from './modules/index.js';
+//      src\assets\sass\main.scss
+import './assets/sass/base.scss'
 
 library.add(faUserSecret)
 library.add(faUser)
