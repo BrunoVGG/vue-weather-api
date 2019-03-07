@@ -3,6 +3,8 @@
     <button @click="callApi" class="btn btn-success">CALL API</button> <br><br>
     <button @click="callCurrent" class="btn btn-success">Current</button><br><br>
     <button @click="callApi" class="btn btn-success">Forecast</button> <br><br>
+
+    <highcharts :options="chartOptions"></highcharts>
   </div>
 </template>
 
@@ -13,7 +15,11 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      chartOptions: {
+        series: [{
+          data: [1,2,3] // sample data
+        }]
+      }
     }
   },
   methods: {
