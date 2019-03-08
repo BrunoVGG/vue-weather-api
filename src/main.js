@@ -14,6 +14,7 @@ import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 import { faChartLine } from '@fortawesome/free-solid-svg-icons'
+import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import store from './modules/index.js'
 import Element from 'element-ui'
@@ -24,6 +25,7 @@ library.add(faUserSecret)
 library.add(faUser)
 library.add(faSpinner)
 library.add(faChartLine)
+library.add(faSignOutAlt)
 Vue.use(require('vue-moment'));
 Vue.use(Element)
 

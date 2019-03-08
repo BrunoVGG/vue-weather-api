@@ -5,7 +5,11 @@
         <i class="fa fa-bars"></i>
         <span>Close</span>
       </a>
-      <a @click="userLogout" class="logout-area">Logout</a>
+      <a @click="userLogout" class="logout-area">
+        Logout
+        <i class="fa fa-sign-out-alt"></i>
+        <font-awesome-icon icon="sign-out-alt"/>
+      </a>
     </div>
 
     <div :class="{'hovered' : showRightMenu}" class="sidebar">
@@ -161,7 +165,8 @@ p {
   &:hover,
   &.active,
   &.hovered {
-    width: 250px;
+    opacity: 0.7;
+    width: 130px;
     -webkit-transition: all 0.2s ease-in-out;
     transition: all 0.2s ease-in-out;
   }
@@ -216,10 +221,6 @@ p {
         }
       }
     }
-  }
-
-  &.hovered {
-    opacity: 0.7;
   }
 }
 

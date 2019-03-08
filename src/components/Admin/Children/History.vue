@@ -16,7 +16,7 @@
         </h1>
 
         <button @click="param = 'temp'" 
-          :class="param === 'temp' ? 'btn-primary' : 'btn-outline-primary'"
+          :class="param === 'temp' ? 'btn-info' : 'btn-outline-info'"
           class="btn"
           type="button" 
         >
@@ -24,7 +24,7 @@
         </button>
 
         <button @click="param = 'wind'" 
-          :class="param === 'wind' ? 'btn-secondary' : 'btn-outline-secondary'"
+          :class="param === 'wind' ? 'btn-info' : 'btn-outline-info'"
           class="btn"
           type="button" 
         >
@@ -32,11 +32,11 @@
         </button>
 
         <button @click="param = 'humidity'" 
-          :class="param === 'humidity' ? 'btn-success' : 'btn-outline-success'"
+          :class="param === 'humidity' ? 'btn-info' : 'btn-outline-info'"
           class="btn"
           type="button" 
         >
-          Wind Speed
+          Humidity
         </button>
 
         <highcharts :options="chartOptions"></highcharts>
@@ -63,10 +63,7 @@ export default {
       param: "temp",
       chartOptions: {
         title: {
-          text: "weather"
-        },
-        subtitle: {
-          text: "5 Days"
+          text: "Weather - 5 Days"
         },
         series: [
           {
