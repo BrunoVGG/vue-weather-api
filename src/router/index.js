@@ -36,7 +36,7 @@ const router = new Router({
       path: '/admin',
       name: 'Admin',
       component: Admin,
-      redirect: {name: 'Today'}, 
+      redirect: {name: 'TodayWheather'}, 
       beforeEnter: (to, from, next) => {
         verifySessionUser()
         .then(()=> {
