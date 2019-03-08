@@ -1,28 +1,30 @@
 <template>
   <div>
-
     <div class="header">
       <a @click.prevent="toggleRightMenu" href="#" id="menu-action">
         <i class="fa fa-bars"></i>
         <span>Close</span>
       </a>
-      <div class="logo">
-        Simple Admin
-      </div>
+      <a @click="userLogout" class="logout-area">Logout</a>
     </div>
 
     <div :class="{'hovered' : showRightMenu}" class="sidebar">
       <ul>
-        <li><a href="#"><i class="fa fa-desktop"></i><span>Desktop</span></a></li>
-        <li><a href="#"><i class="fa fa-server"></i><span>Server</span></a></li>
-        <li><a href="#"><i class="fa fa-calendar"></i><span>Calendar</span></a></li>
-        <li><a href="#"><i class="fa fa-envelope-o"></i><span>Messages</span></a></li>
-        <li><a href="#"><i class="fa fa-table"></i><span>Data Table</span></a></li>
-      </ul>  
+        <li>
+          <router-link :to="{name:'Today'}">
+            <i class="fa fa-desktop"></i>
+            <span>Today</span>
+          </router-link>
+        </li>
+        <li>
+          <router-link :to="{name:'History'}">
+            <i class="fa fa-calendar"></i>
+            <span>History</span>
+          </router-link>
+        </li>
+      </ul>
     </div>
-
     <slot></slot>
-
   </div>
 </template>
 
@@ -44,15 +46,18 @@ export default {
   methods: {
     toggleRightMenu() {
       this.showRightMenu = !this.showRightMenu;
+    },
+    userLogout() {
+      sessionStorage.clear();
+      this.$router.push({ name: "Login" });
     }
   }
 };
 </script>
 
 <style lang="scss">
-@import '@/assets/sass/variables.scss';
-@import url('//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
-@import url(https://fonts.googleapis.com/css?family=Lato:300,400,700);
+@import "@/assets/sass/variables.scss";
+@import url("//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css");
 *,
 *:before,
 *:after {
@@ -65,11 +70,17 @@ body {
   background: #f5f5f5;
   padding: 0;
   margin: 0;
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
+
+  a.logout-area {
+    float: right;
+    margin-right: 10px;
+    cursor: pointer;
+  }
 }
 
 i.fa {
-  font-size: 16px
+  font-size: 16px;
 }
 
 p {
@@ -105,8 +116,8 @@ p {
     font-size: 13px;
     text-transform: uppercase;
     letter-spacing: 1px;
-    -webkit-transition: all .2s ease-in-out;
-    transition: all .2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
     i {
       display: inline-block;
       margin: 0 5px;
@@ -115,21 +126,21 @@ p {
       width: 0px;
       display: none;
       overflow: hidden;
-      -webkit-transition: all .2s ease-in-out;
-      transition: all .2s ease-in-out;
+      -webkit-transition: all 0.2s ease-in-out;
+      transition: all 0.2s ease-in-out;
     }
     &:hover {
       background: rgba(0, 0, 0, 0.25);
     }
     &.active {
       width: 250px;
-      -webkit-transition: all .2s ease-in-out;
-      transition: all .2s ease-in-out;
+      -webkit-transition: all 0.2s ease-in-out;
+      transition: all 0.2s ease-in-out;
       span {
         display: inline;
         width: auto;
-        -webkit-transition: all .2s ease-in-out;
-        transition: all .2s ease-in-out;
+        -webkit-transition: all 0.2s ease-in-out;
+        transition: all 0.2s ease-in-out;
       }
     }
   }
@@ -145,12 +156,14 @@ p {
   background: #fff;
   border-right: 1px solid #ddd;
   text-align: center;
-  -webkit-transition: all .2s ease-in-out;
-  transition: all .2s ease-in-out;
-  &:hover, &.active, &.hovered {
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  &:hover,
+  &.active,
+  &.hovered {
     width: 250px;
-    -webkit-transition: all .2s ease-in-out;
-    transition: all .2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
   }
   ul {
     list-style-type: none;
@@ -166,16 +179,21 @@ p {
         border-bottom: 1px solid #ddd;
         color: #444;
         text-align: left;
+
+        &:hover {
+          text-decoration: none;
+        }
+
         i {
           display: inline-block;
           width: 60px;
           height: 60px;
           line-height: 60px;
           text-align: center;
-          -webkit-animation-duration: .7s;
-          -moz-animation-duration: .7s;
-          -o-animation-duration: .7s;
-          animation-duration: .7s;
+          -webkit-animation-duration: 0.7s;
+          -moz-animation-duration: 0.7s;
+          -o-animation-duration: 0.7s;
+          animation-duration: 0.7s;
           -webkit-animation-fill-mode: both;
           -moz-animation-fill-mode: both;
           -o-animation-fill-mode: both;
@@ -187,6 +205,7 @@ p {
           line-height: 60px;
         }
         &:hover {
+          text-decoration: none;
           background-color: #eee;
           i {
             -webkit-animation-name: swing;
@@ -211,12 +230,12 @@ p {
   left: 0;
   padding: 15px;
   padding-left: 75px;
-  -webkit-transition: all .2s ease-in-out;
-  transition: all .2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
   &.active {
     padding-left: 275px;
-    -webkit-transition: all .2s ease-in-out;
-    transition: all .2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
   }
   .jumbotron {
     background-color: #fff;
@@ -255,7 +274,6 @@ p {
     -webkit-transform: rotate3d(0, 0, 1, 0deg);
     transform: rotate3d(0, 0, 1, 0deg);
   }
-  ;
 }
 
 @keyframes swing {
@@ -284,7 +302,6 @@ p {
     -ms-transform: rotate3d(0, 0, 1, 0deg);
     transform: rotate3d(0, 0, 1, 0deg);
   }
-  ;
 }
 
 .swing {

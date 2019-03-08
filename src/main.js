@@ -13,11 +13,12 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import store from './modules/index.js'; // VueX
+import store from './modules/index.js'
 // import './assets/sass/base.scss'
 
 library.add(faUserSecret)
 library.add(faUser)
+Vue.use(require('vue-moment'));
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 

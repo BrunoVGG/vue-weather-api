@@ -43,32 +43,17 @@
 </template>
 
 <script>
-import Vue from "vue";
-
 export default {
-  name: "HelloWorld",
+  name: 'HelloWorld',
   data() {
     return {
       formData: {
-        login: "admin",
-        password: "123456"
+        login: 'admin',
+        password: '123456'
       },
       errors: {
         login: false,
         password: false
-      },
-      alert: {
-        message: "hello world"
-      },
-      login: {
-        login: "",
-        password: ""
-      },
-      shake: false,
-      good: "",
-      fake: {
-        login: "vincent",
-        password: "admin"
       }
     };
   },
@@ -84,7 +69,7 @@ export default {
       this.errors.password = false;
 
       this.$store
-        .dispatch("login", this.formData)
+        .dispatch('login', this.formData)
         .then(() => {
           self.$router.push({name: 'Admin'})
         })
