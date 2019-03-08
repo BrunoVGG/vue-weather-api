@@ -69,7 +69,8 @@ export default {
           {
             data: []
           }
-        ]
+        ],
+        byday: []
       }
     };
   },
@@ -90,13 +91,16 @@ export default {
         self.updateData();
       })
       .catch(errors => {
-        self.error = errors.response.data.message;
+        if (errors.response && errors.response.data && errors.response.data.message) {
+          self.error = errors.response.data.message;
+        }
       });
     },
     updateData() {
       this.chartOptions.series = [];
       if (this.$store.state.ForecastWeather.data) {
         const param = this.param;
+
         let data = this.$store.state.ForecastWeather.data.list.map(item => {
           if (param === 'wind') {
             return item.wind.speed;
@@ -105,7 +109,7 @@ export default {
           } else {
             return item.main.humidity;
           }
-
+          
           let newItem = {
             data: []
           };

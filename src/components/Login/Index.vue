@@ -82,15 +82,36 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import 'src/assets/sass/variables.scss';
+@import "@/assets/sass/variables.scss";
+@import url("//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css");
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
 
+body {
+  background: #f5f5f5;
+  padding: 0;
+  margin: 0;
+  font-family: "Lato", sans-serif;
+
+  a.logout-area {
+    float: right;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+}
 
   html {
 
     body {
-      font-family: "Poppins", sans-serif;
-      height: 100vh;
-      background-color: $background-color;
+      background: #f5f5f5;
+      padding: 0;
+      margin: 0;
+      font-family: "Lato", sans-serif;
     }
 
     a {

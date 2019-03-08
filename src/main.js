@@ -18,7 +18,8 @@ import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import store from './modules/index.js'
 import Element from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css';
+import 'element-ui/lib/theme-chalk/index.css'
+import VueLodash from 'vue-lodash'
 // import './assets/sass/base.scss'
 
 library.add(faUserSecret)
@@ -34,6 +35,7 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.use(BootstrapVue)
 Vue.use(VueAxios, axios)
 Vue.use(HighchartsVue)
+Vue.use(VueLodash)
 
 Vue.prototype.weather = {
   urlId: '&APPID=375a6328896bcf6fb7347fa13778d92e',

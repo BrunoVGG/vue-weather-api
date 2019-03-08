@@ -71,7 +71,7 @@ export default {
 }
 
 body {
-  background: #f5f5f5;
+  background: $background-color;
   padding: 0;
   margin: 0;
   font-family: "Lato", sans-serif;
@@ -102,10 +102,7 @@ p {
   height: 50px;
   line-height: 50px;
   color: #fff;
-  .logo {
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
+
   #menu-action {
     display: block;
     float: left;
