@@ -2,9 +2,11 @@
   <div class="row">
     <div class="col-md-3">
       <SearchForm 
-        v-model="filters"
-        :has-country-code="true"
-        @on-submit="callForecastWeather"/>
+        v-model="filters" 
+        :has-country-code="true" 
+        @on-submit="callForecastWeather"
+        :error.sync="error"
+      />
     </div>
     <div class="col-md-9">
       <div class="jumbotron">
@@ -15,29 +17,26 @@
           </a>
         </h1>
 
-        <button @click="param = 'temp'" 
+        <button
+          @click="param = 'temp'"
           :class="param === 'temp' ? 'btn-info' : 'btn-outline-info'"
           class="btn"
-          type="button" 
-        >
-          Temperature
-        </button>
-
-        <button @click="param = 'wind'" 
+          type="button"
+        >Temperature</button>
+        
+        <button
+          @click="param = 'wind'"
           :class="param === 'wind' ? 'btn-info' : 'btn-outline-info'"
           class="btn"
-          type="button" 
-        >
-          Wind Speed
-        </button>
-
-        <button @click="param = 'humidity'" 
+          type="button"
+        >Wind Speed</button>
+        
+        <button
+          @click="param = 'humidity'"
           :class="param === 'humidity' ? 'btn-info' : 'btn-outline-info'"
           class="btn"
-          type="button" 
-        >
-          Humidity
-        </button>
+          type="button"
+        >Humidity</button>
 
         <highcharts :options="chartOptions"></highcharts>
       </div>
@@ -46,24 +45,25 @@
 </template>
 
 <script>
-import Vue from "vue";
-import SearchForm from "./SearchForm";
+import Vue from 'vue';
+import SearchForm from './SearchForm';
 
 export default {
-  name: "History",
+  name: 'History',
   components: {
     SearchForm
   },
   data() {
     return {
+      error: '',
       filters: {
-        cityName: "London",
-        countryCode: "UK"
+        cityName: 'London',
+        countryCode: 'UK'
       },
-      param: "temp",
+      param: 'temp',
       chartOptions: {
         title: {
-          text: "Weather - 5 Days"
+          text: 'Weather - 5 Days'
         },
         series: [
           {
@@ -83,34 +83,35 @@ export default {
   },
   methods: {
     callForecastWeather() {
-      const url = `${this.weather.urlBase}forecast?q=${this.filters.cityName}&units=metric${this.weather.urlId}`;
-      this.$store.dispatch("getForecastWeather", url).then(() => {
-        this.updateData();
+      let self = this;
+      self.error = '';
+      const url = `${self.weather.urlBase}forecast?q=${self.filters.cityName},${self.filters.countryCode}&units=metric${this.weather.urlId}`;
+      self.$store.dispatch('getForecastWeather', url).then(() => {
+        self.updateData();
+      })
+      .catch(errors => {
+        self.error = errors.response.data.message;
       });
     },
     updateData() {
       this.chartOptions.series = [];
       if (this.$store.state.ForecastWeather.data) {
         const param = this.param;
-        let data = this.$store.state.ForecastWeather.data.list
-          .map((item) => {
-
-            if (param === "wind") {
-              return item.wind.speed;
-            } else if (param === "temp") {
-              return item.main.temp;
-            } else {
-              return item.main.humidity;
-            }
-            
-            let newItem = {
-              data: []
-            };
+        let data = this.$store.state.ForecastWeather.data.list.map(item => {
+          if (param === 'wind') {
+            return item.wind.speed;
+          } else if (param === 'temp') {
+            return item.main.temp;
+          } else {
+            return item.main.humidity;
           }
-        );
 
-        this.chartOptions.series.push({'data': data})
+          let newItem = {
+            data: []
+          };
+        });
 
+        this.chartOptions.series.push({ data: data });
       } else {
         this.chartOptions.series = [];
       }

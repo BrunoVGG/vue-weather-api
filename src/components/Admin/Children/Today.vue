@@ -1,7 +1,11 @@
 <template>
   <div class="row">
     <div class="col-md-3">
-      <SearchForm v-model="filters" @on-submit="callTodayData"/>
+      <SearchForm 
+        v-model="filters"
+        :error.sync="error"
+        @on-submit="callTodayData"
+      />
     </div>
     <div class="col-md-9">
       <div class="jumbotron">
@@ -77,6 +81,7 @@ export default {
   },
   data() {
     return {
+      error: '',
       chartOptions: {
         series: [
           {
@@ -102,8 +107,13 @@ export default {
   },
   methods: {
     callTodayData() {
-      const url = `${this.weather.urlBase}weather?q=${this.filters.cityName}&units=metric${this.weather.urlId}`;
-      this.$store.dispatch('getCurrentWeather', url);
+      let self = this;
+      self.error = '';
+      const url = `${self.weather.urlBase}weather?q=${self.filters.cityName}&units=metric${self.weather.urlId}`;
+      self.$store.dispatch('getCurrentWeather', url)
+      .catch(errors => {
+        self.error = errors.response.data.message;
+      });;
     }
   }
 };

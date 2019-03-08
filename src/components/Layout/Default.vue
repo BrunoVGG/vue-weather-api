@@ -33,10 +33,10 @@
 </template>
 
 <script>
-import Vue from "vue";
+import Vue from 'vue';
 
 export default {
-  name: "HelloWorld",
+  name: 'HelloWorld',
   data() {
     return {
       showRightMenu: false
@@ -53,7 +53,7 @@ export default {
     },
     userLogout() {
       sessionStorage.clear();
-      this.$router.push({ name: "Login" });
+      this.$router.push({ name: 'Login' });
     }
   }
 };

@@ -23,9 +23,11 @@
           required
         >
       </div>
+      <div v-if="error" class="alert alert-danger">
+        {{ error }}
+      </div>  
       <button :disabled="loading" type="submit" class="btn btn-primary col-md-12">
-        <font-awesome-icon v-if="loading" icon="spinner" class="fa-spin"/>
-        Submit
+        <font-awesome-icon v-if="loading" icon="spinner" class="fa-spin"/>Submit
       </button>
     </form>
   </div>
@@ -33,14 +35,20 @@
 
 <script>
 export default {
-  name: "History",
+  name: 'History',
   props: {
     value: {
       type: Object
     },
     hasCountryCode: {
       type: Boolean,
+      required: false,
       default: false
+    },
+    error: {
+      type: String,
+      required: false,
+      default: ''
     }
   },
   data() {
@@ -48,7 +56,7 @@ export default {
       loading: false,
       errors: {
         status: false,
-        message: ""
+        message: ''
       }
     };
   },
@@ -58,7 +66,7 @@ export default {
         return this.value;
       },
       set(newValue) {
-        this.$emit("input", newValue);
+        this.$emit('input', newValue);
       }
     }
   },
@@ -72,7 +80,7 @@ export default {
 </script>
 
 <style scoped>
-  input {
-    text-align: center
-  }
+input {
+  text-align: center;
+}
 </style>
