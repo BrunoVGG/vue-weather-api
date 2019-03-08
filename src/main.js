@@ -12,13 +12,20 @@ import HighchartsVue from 'highcharts-vue'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
+import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+import { faChartLine } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import store from './modules/index.js'
+import Element from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css';
 // import './assets/sass/base.scss'
 
 library.add(faUserSecret)
 library.add(faUser)
+library.add(faSpinner)
+library.add(faChartLine)
 Vue.use(require('vue-moment'));
+Vue.use(Element)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 

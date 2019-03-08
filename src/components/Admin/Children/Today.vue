@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <div class="col-md-3">
-      <SearchForm v-model="filters"/>
+      <SearchForm v-model="filters" @on-submit="callTodayData"/>
     </div>
     <div class="col-md-9">
       <div class="jumbotron">
@@ -12,7 +12,7 @@
           </a>
         </h1>
 
-        <div v-if="data" class="card-deck">
+        <div v-if="data && data.main && data.main.temp" class="card-deck">
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">
@@ -88,7 +88,7 @@ export default {
       sunset: null,
       filters: {
         cityName: 'London',
-        countryCode: 'Uk'
+        countryCode: 'UK'
       }
     };
   },
@@ -98,10 +98,10 @@ export default {
     }
   },
   mounted() {
-    this.callCurrent();
+    this.callTodayData();
   },
   methods: {
-    callCurrent() {
+    callTodayData() {
       const url = `${this.weather.urlBase}weather?q=${this.filters.cityName}&units=metric${this.weather.urlId}`;
       this.$store.dispatch('getCurrentWeather', url);
     }

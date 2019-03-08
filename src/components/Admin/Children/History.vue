@@ -1,44 +1,133 @@
 <template>
-  <div>
-    <div class="jumbotron">
-      <h1 id="hello,-world!">
-        History
-        <a class="anchorjs-link" href="#hello,-world!">
-          <span class="anchorjs-icon"></span>
-        </a>
-      </h1>
+  <div class="row">
+    <div class="col-md-3">
+      <SearchForm v-model="filters" @on-submit="callForecastWeather"/>
+    </div>
+    <div class="col-md-9">
+      <div class="jumbotron">
+        <h1 id="hello,-world!">
+          History
+          <a class="anchorjs-link" href="#hello,-world!">
+            <span class="anchorjs-icon"></span>
+          </a>
+        </h1>
 
-      <highcharts :options="chartOptions"></highcharts>
+        <button @click="param = 'temp'" 
+          :class="param === 'temp' ? 'btn-primary' : 'btn-outline-primary'"
+          class="btn"
+          type="button" 
+        >
+          Temperature
+        </button>
+
+        <button @click="param = 'wind'" 
+          :class="param === 'wind' ? 'btn-secondary' : 'btn-outline-secondary'"
+          class="btn"
+          type="button" 
+        >
+          Wind Speed
+        </button>
+
+        <button @click="param = 'humidity'" 
+          :class="param === 'humidity' ? 'btn-success' : 'btn-outline-success'"
+          class="btn"
+          type="button" 
+        >
+          Wind Speed
+        </button>
+
+        <highcharts :options="chartOptions"></highcharts>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import Vue from "vue";
+import SearchForm from "./SearchForm";
 
 export default {
   name: "History",
+  components: {
+    SearchForm
+  },
   data() {
     return {
+      filters: {
+        cityName: "London",
+        countryCode: "UK"
+      },
+      param: "temp",
       chartOptions: {
+        title: {
+          text: "weather"
+        },
+        subtitle: {
+          text: "5 Days"
+        },
         series: [
           {
-            data: [1, 2, 3] // sample data
+            data: []
           }
         ]
       }
     };
   },
+  watch: {
+    param() {
+      debugger
+      this.updateData();
+    }
+  },
   mounted() {
-    this.callForecast();
+    this.callForecastWeather();
   },
   methods: {
-    callForecast() {
-      const url =
-        "http://api.openweathermap.org/data/2.5/forecast?q=London&APPID=375a6328896bcf6fb7347fa13778d92e";
-      Vue.axios.get(url).then(response => {
-        console.log(response.data);
+    callForecastWeather() {
+      const url = `${this.weather.urlBase}forecast?q=${
+        this.filters.cityName
+      }&units=metric${this.weather.urlId}`;
+      this.$store.dispatch("getForecastWeather", url).then(() => {
+        this.updateData();
       });
+    },
+    updateData() {
+      this.chartOptions.series = [];
+      if (this.$store.state.ForecastWeather.data) {
+        debugger;
+        const param = this.param;
+        let data = this.$store.state.ForecastWeather.data.list
+          .map((item) => {
+
+            if (param === "wind") {
+              return item.wind.speed;
+            } else if (param === "temp") {
+              return item.main.temp;
+            } else {
+              return item.main.humidity;
+            }
+            
+            let newItem = {
+              data: []
+            };
+
+            // if (param === "wind") {
+            //   newItem.data.push(item.wind.speed);
+            // } else if (param === "temp") {
+            //   newItem.data.push(item.main.temp);
+            // } else {
+            //   newItem.data.push(item.main.humidit);
+            // }
+            // return newItem;
+          }
+
+        );
+
+        this.chartOptions.series.push({'data': data})
+
+      } else {
+        this.chartOptions.series = [];
+      }
     }
   }
 };

@@ -23,8 +23,10 @@
           required
         >
       </div>
-      {{ loading }}
-      <button :disabled="loading" type="submit" class="btn btn-primary col-md-12">Submit</button>
+      <button :disabled="loading" type="submit" class="btn btn-primary col-md-12">
+        <font-awesome-icon v-if="loading" icon="spinner" class="fa-spin"/>
+        Submit
+      </button>
     </form>
   </div>
 </template>
@@ -48,29 +50,14 @@ export default {
         return this.value;
       },
       set(newValue) {
-        vm.$emit("input", newValue);
+        this.$emit("input", newValue);
       }
     }
   },
   mounted() {},
   methods: {
     applyFilters() {
-      let self = this;
-      const cityName = self.filters.cityName;
-      const countryCode = self.filters.countryCode;
-      self.loading = true;
-      const url = `${
-        self.weather.urlBase
-      }weather?q=${cityName},${countryCode}&units=metric${self.weather.urlId}`;
-      self.$store.dispatch("getCurrentWeather", url)
-      .then(() => {
-        self.loading = false;
-      })
-      .catch((error)=> {
-        debugger
-        self.loading = false;
-        self.errors.status = true;
-      });
+      this.$emit('on-submit');
     }
   }
 };

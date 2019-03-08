@@ -1,20 +1,20 @@
 import Vue from 'vue';
 
-const CurrentWeather = {
+const ForecastWeather = {
   state: {
     data: null
   },
   mutations: {
-    refreshCurrentWeather(state, data) {
+    refreshForecastWeather(state, data) {
       state.data = data;
     }
   },
   actions: {
-    getCurrentWeather(context, url) {
+    getForecastWeather(context, url) {
       return new Promise((resolve, reject)=> {
         Vue.axios.get(url)
         .then((response) => {
-          context.commit('refreshCurrentWeather', response.data);
+          context.commit('refreshForecastWeather', response.data);
           resolve();
         })
         .catch((errors) => {
@@ -25,4 +25,4 @@ const CurrentWeather = {
   }
 }
 
-export default CurrentWeather 
+export default ForecastWeather 
