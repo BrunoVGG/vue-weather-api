@@ -75,7 +75,7 @@ import Vue from 'vue';
 import SearchForm from './SearchForm';
 
 export default {
-  name: 'Today',
+  name: 'TodayWheather',
   components: {
     SearchForm
   },

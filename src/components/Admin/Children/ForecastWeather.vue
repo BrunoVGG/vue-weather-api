@@ -49,7 +49,7 @@ import Vue from 'vue';
 import SearchForm from './SearchForm';
 
 export default {
-  name: 'History',
+  name: 'ForecastWeather',
   components: {
     SearchForm
   },

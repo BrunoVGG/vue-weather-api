@@ -2,8 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/components/Login/'
 import Admin from '@/components/Admin/'
-import Today from '@/components/Admin/children/Today'
-import History from '@/components/Admin/children/History'
+import TodayWheather from '@/components/Admin/children/TodayWheather'
+import ForecastWeather from '@/components/Admin/children/ForecastWeather'
 
 Vue.use(Router)
 Vue.use(Router)
@@ -48,14 +48,14 @@ const router = new Router({
       },
       children: [
         {
-          name: 'Today',
+          name: 'TodayWheather',
           path: 'today',
-          component: Today
+          component: TodayWheather
         },
         {
-          name: 'History',
-          path: 'history',
-          component: History
+          name: 'ForecastWeather',
+          path: 'forecast',
+          component: ForecastWeather
         }
       ]
     }

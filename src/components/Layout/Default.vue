@@ -15,15 +15,15 @@
     <div :class="{'hovered' : showRightMenu}" class="sidebar">
       <ul>
         <li>
-          <router-link :to="{name:'Today'}">
+          <router-link :to="{name:'TodayWheather'}">
             <i class="fa fa-desktop"></i>
             <span>Today</span>
           </router-link>
         </li>
         <li>
-          <router-link :to="{name:'History'}">
+          <router-link :to="{name:'ForecastWeather'}">
             <i class="fa fa-calendar"></i>
-            <span>History</span>
+            <span>Forecast</span>
           </router-link>
         </li>
       </ul>
@@ -163,7 +163,7 @@ p {
   &.active,
   &.hovered {
     opacity: 0.7;
-    width: 130px;
+    width: 150px;
     -webkit-transition: all 0.2s ease-in-out;
     transition: all 0.2s ease-in-out;
   }
