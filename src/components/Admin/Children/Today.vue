@@ -24,14 +24,14 @@
                   >
                 </span>
               </h5>
-              <p class="temp-value card-text">{{ data.main.temp }}</p>
+              <p class="temp-value card-text">{{ data.main.temp }} °C</p>
               <p class="card-text">
                 <label>min:</label>
-                {{ data.main.temp_min }}
+                {{ data.main.temp_min }} °C
               </p>
               <p class="card-text">
                 <label>max:</label>
-                {{ data.main.temp_max }}
+                {{ data.main.temp_max }} °C
               </p>
               <p v-for="(item, i) in data.weather" :key="i" class="card-text">{{ item.description }}</p>
             </div>

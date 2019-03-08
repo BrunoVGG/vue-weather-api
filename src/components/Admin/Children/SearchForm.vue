@@ -12,7 +12,7 @@
           required
         >
       </div>
-      <div class="form-group">
+      <div v-if="hasCountryCode" class="form-group">
         <label for="countryCode">Country Code</label>
         <input
           v-model="filters.countryCode"
@@ -34,7 +34,15 @@
 <script>
 export default {
   name: "History",
-  props: ["value"],
+  props: {
+    value: {
+      type: Object
+    },
+    hasCountryCode: {
+      type: Boolean,
+      default: false
+    }
+  },
   data() {
     return {
       loading: false,
@@ -62,3 +70,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+  input {
+    text-align: center
+  }
+</style>

@@ -1,12 +1,15 @@
 <template>
   <div class="row">
     <div class="col-md-3">
-      <SearchForm v-model="filters" @on-submit="callForecastWeather"/>
+      <SearchForm 
+        v-model="filters"
+        :has-country-code="true"
+        @on-submit="callForecastWeather"/>
     </div>
     <div class="col-md-9">
       <div class="jumbotron">
         <h1 id="hello,-world!">
-          History
+          Forecast
           <a class="anchorjs-link" href="#hello,-world!">
             <span class="anchorjs-icon"></span>
           </a>
@@ -75,7 +78,6 @@ export default {
   },
   watch: {
     param() {
-      debugger
       this.updateData();
     }
   },
@@ -84,9 +86,7 @@ export default {
   },
   methods: {
     callForecastWeather() {
-      const url = `${this.weather.urlBase}forecast?q=${
-        this.filters.cityName
-      }&units=metric${this.weather.urlId}`;
+      const url = `${this.weather.urlBase}forecast?q=${this.filters.cityName}&units=metric${this.weather.urlId}`;
       this.$store.dispatch("getForecastWeather", url).then(() => {
         this.updateData();
       });
@@ -94,7 +94,6 @@ export default {
     updateData() {
       this.chartOptions.series = [];
       if (this.$store.state.ForecastWeather.data) {
-        debugger;
         const param = this.param;
         let data = this.$store.state.ForecastWeather.data.list
           .map((item) => {
@@ -110,17 +109,7 @@ export default {
             let newItem = {
               data: []
             };
-
-            // if (param === "wind") {
-            //   newItem.data.push(item.wind.speed);
-            // } else if (param === "temp") {
-            //   newItem.data.push(item.main.temp);
-            // } else {
-            //   newItem.data.push(item.main.humidit);
-            // }
-            // return newItem;
           }
-
         );
 
         this.chartOptions.series.push({'data': data})
